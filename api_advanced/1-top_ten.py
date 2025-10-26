@@ -13,7 +13,7 @@ def top_ten(subreddit):
     If the subreddit is invalid, prints None.
     """
     url = 'https://www.reddit.com/r/{}/hot.json?limit=10'.format(subreddit)
-    headers = {"User-Agent": "Mozilla/5.0"}
+    headers = {"User-Agent":  "ALUStudent/1.0"}
     params = {"limit": 10}
 
     response = requests.get(url, headers=headers, params=params,
