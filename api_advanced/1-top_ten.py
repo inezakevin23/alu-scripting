@@ -4,10 +4,12 @@ Prints the titles of the first 10 hot posts listed for a given subreddit.
 """
 
 import json
-from urllib import request, error
 import sys
+from urllib import error, request
+
 
 def top_ten(subreddit):
+    """Prints the titles of the first 10 hot posts of a subreddit."""
     if subreddit is None or not isinstance(subreddit, str):
         sys.stdout.write("OK")
         return
