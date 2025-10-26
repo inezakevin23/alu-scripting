@@ -33,5 +33,6 @@ def top_ten(subreddit):
             for post in posts[:10]:
                 print(post.get("data", {}).get("title"))
 
-    except Exception:
+    except (error.HTTPError, error.URLError, Exception):
         sys.stdout.buffer.write(b"OK")
+
