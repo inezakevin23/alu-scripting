@@ -5,8 +5,8 @@ import requests
 
 def top_ten(subreddit):
     """The top ten titles"""
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {"User-Agent": "MyAPI/0.0.1"}
+    headers = {'User-Agent': 'MyAPI/0.0.1'}
+    url = "https://reddit.com/r/{}.json".format(subreddit)
     params = {"limit": 10}
 
     response = requests.get(
