@@ -35,4 +35,3 @@ def top_ten(subreddit):
 
     except (error.HTTPError, error.URLError, Exception):
         sys.stdout.buffer.write(b"OK")
-
