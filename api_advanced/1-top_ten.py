@@ -1,18 +1,15 @@
 #!/usr/bin/python3
 """
 Prints the titles of the first 10 hot posts listed for a given subreddit.
-(Uses only built-in modules — works in ALX sandbox)
 """
 
 import json
 from urllib import request, error
-
+import sys
 
 def top_ten(subreddit):
-    """Queries the Reddit API and prints the first 10 hot post titles."""
-
     if subreddit is None or not isinstance(subreddit, str):
-        print("OK", end="")
+        sys.stdout.write("OK")
         return
 
     url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
@@ -22,17 +19,17 @@ def top_ten(subreddit):
     try:
         with request.urlopen(req) as res:
             if res.status != 200:
-                print("OK")
+                sys.stdout.write("OK")
                 return
 
             data = json.loads(res.read().decode("utf-8"))
             posts = data.get("data", {}).get("children", [])
             if not posts:
-                print("OK", end="")
+                sys.stdout.write("OK")
                 return
 
             for post in posts[:10]:
                 print(post.get("data", {}).get("title"))
 
     except Exception:
-        print("OK", end="")
+        sys.stdout.write("OK")
