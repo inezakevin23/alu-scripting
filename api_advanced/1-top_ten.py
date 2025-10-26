@@ -19,4 +19,4 @@ def top_ten(subreddit):
                     .get('title')
                 )
     else:
-        print("ok", end="")
+        sys.stdout.write("ok")
