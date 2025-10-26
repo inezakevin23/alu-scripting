@@ -22,7 +22,7 @@ def top_ten(subreddit):
     try:
         with request.urlopen(req) as res:
             if res.status != 200:
-                print("OK", end="")
+                print("OK")
                 return
 
             data = json.loads(res.read().decode("utf-8"))
