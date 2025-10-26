@@ -1,37 +1,24 @@
 #!/usr/bin/python3
-"""
-Prints the titles of the first 10 hot posts listed for a given subreddit.
-"""
-
-import json
-from urllib import error, request
-import sys
+"""Script that fetch 10 hot post for a given subreddit."""
+import requests
 
 
 def top_ten(subreddit):
-    """Prints the titles of the first 10 hot posts of a subreddit."""
-    if subreddit is None or not isinstance(subreddit, str):
-        sys.stdout.buffer.write(b"OK")
-        return
+    """Return number of subscribers if @subreddit is valid subreddit.
+    if not return 0."""
 
-    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
     headers = {'User-Agent': 'MyAPI/0.0.1'}
-    req = request.Request(url, headers=headers)
+    subreddit_url = "https://reddit.com/r/{}.json".format(subreddit)
+    response = requests.get(subreddit_url, headers=headers)
 
-    try:
-        with request.urlopen(req) as res:
-            if res.status != 200:
-                sys.stdout.buffer.write(b"OK")
-                return
-
-            data = json.loads(res.read().decode("utf-8"))
-            posts = data.get("data", {}).get("children", [])
-            if not posts:
-                sys.stdout.buffer.write(b"OK")
-                return
-
-            for post in posts[:10]:
-                print(post.get("data", {}).get("title"))
-
-    except (error.HTTPError, error.URLError, Exception):
-        sys.stdout.buffer.write(b"OK")
+    if response.status_code == 200:
+        json_data = response.json()
+        for i in range(10):
+            print(
+                json_data.get('data')
+                .get('children')[i]
+                .get('data')
+                .get('title')
+            )
+    else:
+        print(OK)
