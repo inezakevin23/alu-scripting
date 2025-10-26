@@ -11,7 +11,7 @@ from urllib import error, request
 def top_ten(subreddit):
     """Prints the titles of the first 10 hot posts of a subreddit."""
     if subreddit is None or not isinstance(subreddit, str):
-        sys.stdout.write("OK")
+        sys.stdout.buffer.write(b"OK")
         return
 
     url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
@@ -21,17 +21,17 @@ def top_ten(subreddit):
     try:
         with request.urlopen(req) as res:
             if res.status != 200:
-                sys.stdout.write("OK")
+                sys.stdout.buffer.write(b"OK")
                 return
 
             data = json.loads(res.read().decode("utf-8"))
             posts = data.get("data", {}).get("children", [])
             if not posts:
-                sys.stdout.write("OK")
+                sys.stdout.buffer.write(b"OK")
                 return
 
             for post in posts[:10]:
                 print(post.get("data", {}).get("title"))
 
     except Exception:
-        sys.stdout.write("OK")
+        sys.stdout.buffer.write(b"OK")
