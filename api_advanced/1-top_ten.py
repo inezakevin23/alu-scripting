@@ -20,12 +20,12 @@ def top_ten(subreddit):
                             allow_redirects=False)
 
     if response.status_code != 200:
-        print(None)
+        print("None", end="")
         return
 
     data = response.json().get("data")
     if not data or "children" not in data:
-        print(None)
+        print("None", end="")
         return
 
     for post in data.get("children", []):
