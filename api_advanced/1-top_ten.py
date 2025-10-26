@@ -4,8 +4,8 @@ Prints the titles of the first 10 hot posts listed for a given subreddit.
 """
 
 import json
-import sys
 from urllib import error, request
+import sys
 
 
 def top_ten(subreddit):
